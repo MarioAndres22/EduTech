@@ -33,7 +33,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscar(@PathVariable Integer id){
+    public ResponseEntity<Usuario> buscar(@PathVariable Long id){
         try{
             Usuario usuario = usuarioService.findById(id);
             return ResponseEntity.ok(usuario);
@@ -42,9 +42,9 @@ public class UsuarioController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizar(@PathVariable Integer id,@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> actualizar(@PathVariable  Long id,@RequestBody Usuario usuario){
         try{
-            Usuario user= UsuarioService.findById(id);
+            Usuario user= usuarioService.findById(id);
             user.setId(id);
             user.setRun(usuario.getRun());
             user.setNombre(usuario.getNombre());
