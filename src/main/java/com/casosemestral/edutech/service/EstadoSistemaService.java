@@ -28,4 +28,6 @@ public class EstadoSistemaService {
     public List<EstadoSistema> listarEstado() {
         return repository.findAll();
     }
+
+
 }
