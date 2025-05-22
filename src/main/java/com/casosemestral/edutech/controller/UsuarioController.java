@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
+@RequestMapping("/api/usuarios")
 
 public class UsuarioController {
 
@@ -66,7 +67,14 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @PostMapping("/{usuarioId}/roles/{rolId}")
+    public ResponseEntity<Usuario> asignarRol(
+            @PathVariable Long usuarioId,
+            @PathVariable Long rolId) {
+        return usuarioService.asignarRol(usuarioId, rolId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
 
 

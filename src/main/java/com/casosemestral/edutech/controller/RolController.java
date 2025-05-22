@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/roles")
@@ -17,7 +18,7 @@ public class RolController {
 
     @PostMapping
     public ResponseEntity<Rol> crear(@RequestBody Rol rol) {
-        return ResponseEntity.ok(rolService.guardar(rol));
+        return ResponseEntity.ok(rolService.crear(rol));
     }
 
     @GetMapping
@@ -27,8 +28,16 @@ public class RolController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Rol> obtenerPorId(@PathVariable Long id) {
-        return rolService.obtenerPorId(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(rolService.obtenerPorId(id));
+
+    }
+
+    @PostMapping("/{id}/permisos")
+    public ResponseEntity<Rol> asignarPermisos(
+            @PathVariable Long id,
+            @RequestBody Set<Long> permisosIds
+    ) {
+        Rol rol = rolService.asignarPermisos(id, permisosIds);
+        return ResponseEntity.ok(rol);
     }
 }

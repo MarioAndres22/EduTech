@@ -25,4 +25,6 @@ public class PermisoController {
     public List<Permiso> listar() {
         return permisoService.obtenerTodos();
     }
+
+
 }

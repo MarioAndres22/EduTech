@@ -18,4 +18,12 @@ public class Rol {
 
     @Column(nullable = false, unique = true)
     private String nombre;
+
+    @ManyToMany
+    @JoinTable(
+            name = "rol_permisos",
+            joinColumns = @JoinColumn(name = "rol_id"),
+            inverseJoinColumns = @JoinColumn(name = "permiso_id")
+    )
+    private Set<Permiso> permisos;
 }
